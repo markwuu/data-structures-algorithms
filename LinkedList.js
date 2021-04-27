@@ -53,6 +53,47 @@ class LinkedList {
     }
 
     // Insert at index
+    // Edge case: inserting at index 0 // Reuse insertFirst function
+    // Edge case: out of bounds // return
+    // Otherwise, create the node
+    // Create current and previous pointers, and count variable
+    // Set current to head
+    // while (count < index) // (0 < 1)
+    // Set previous to current
+    // Increase count
+    // Set current to next
+    // while (count < index) // (1 < 1)
+    // Breaks while loop
+    // node.next set to current node
+    // previous.next set to the new node
+    // increase the size
+    insertAtIndex(data, index) {
+        if(index === 0) {
+            this.insertFirst(data);
+            return;
+        }
+
+        if (index > this.size) {
+            return;
+        }
+
+        const node = new Node(data);
+        let current, previous, count = 0;
+
+        //Set current to first
+        current = this.head;
+
+        while(count < index){
+            previous = current; //node before index
+            count++;
+            current = current.next // node after index
+        }
+
+        node.next = current;
+        previous.next = node;
+
+        this.size++;
+    }
 
     // Get at index
 
@@ -87,4 +128,5 @@ ll.insertFirst(100);
 ll.insertLast(400);
 ll.insertLast(500);
 ll.insertLast(600);
+ll.insertAtIndex(1, 6);
 ll.printList();
