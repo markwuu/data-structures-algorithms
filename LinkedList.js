@@ -96,6 +96,30 @@ class LinkedList {
     }
 
     // Get at index
+    // Set current to the head
+    // Set a count to 0
+    // Traverse through the linked list => while(current)
+    // Starting from the first node
+    // CHECK IF COUNT == INDEX
+    // If the count is equal to the index, then we have our node
+    // Else, Set current to the next data point
+    // Increase the count by 1
+    // CHECK IF COUNT == INDEX
+    // Repeat until index is found
+    getAtIndex(index) {
+        let current = this.head;
+        let count = 0;
+
+        while(current){
+            if(count == index) {
+                console.log(current.data);
+            }
+            current = current.next;
+            count++;
+        }
+
+        return;
+    }
 
     // Remove at index
 
@@ -129,4 +153,8 @@ ll.insertLast(400);
 ll.insertLast(500);
 ll.insertLast(600);
 ll.insertAtIndex(1, 6);
+// ll.getAtIndex(0); //100
+// ll.getAtIndex(1); //200
+// ll.getAtIndex(2); //300
+// ll.getAtIndex(6); //1
 ll.printList();
