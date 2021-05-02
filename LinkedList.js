@@ -155,6 +155,22 @@ class LinkedList {
         this.size--;
     }
 
+    reverseList() {
+        let prev = null;
+        let following;
+        let current = this.head;
+
+        while(current){
+            following = current.next;
+            current.next = prev;
+            prev = current;
+            current = following;
+        }
+
+        this.head = prev;
+        return prev;
+    }
+
     // Clear list
     clearList() {
         this.head = null;
@@ -188,11 +204,12 @@ ll.insertFirst(100);
 ll.insertLast(400);
 ll.insertLast(500);
 ll.insertLast(600);
-ll.insertAtIndex(1, 6);
+ll.insertAtIndex(1, 0);
 // ll.getAtIndex(0); //100
 // ll.getAtIndex(1); //200
 // ll.getAtIndex(2); //300
 // ll.getAtIndex(6); //1
 // ll.removeAtIndex(0);
 // ll.clearList();
+// ll.reverseList();
 ll.printList();
