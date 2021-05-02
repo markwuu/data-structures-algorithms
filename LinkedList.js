@@ -122,6 +122,38 @@ class LinkedList {
     }
 
     // Remove at index
+    // Edge case: index is out of range
+    // Set current to the head
+    // Traverse thru the linked list => while(count < index)
+    // Increase count by 1
+    // Set previous to current
+    // Set current to next value
+    // Once the previous = current; (previous is 1 node back from desired index removal)
+    // Set the previous next's node to the currents next value
+    // Current is the node that is removed
+    // Decrement the size
+    removeAtIndex(index){
+        if(index > 0 && index > this.size) return;
+
+        let current = this.head;
+        let previous;
+        let count = 0;
+
+        // Remove first
+        if(index === 0) {
+            this.head = current.next;
+        } else {
+            while(count < index) {
+                count++;
+                previous = current;
+                current = current.next;
+            }
+
+            previous.next = current.next;
+        }
+
+        this.size--;
+    }
 
     // Clear list
 
@@ -157,4 +189,5 @@ ll.insertAtIndex(1, 6);
 // ll.getAtIndex(1); //200
 // ll.getAtIndex(2); //300
 // ll.getAtIndex(6); //1
+// ll.removeAtIndex(0);
 ll.printList();
