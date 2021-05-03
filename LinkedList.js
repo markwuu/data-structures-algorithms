@@ -125,6 +125,7 @@ class LinkedList {
 
     // Remove at index
     // Edge case: index is out of range
+    // Edge case: index is 0
     // Set current to the head
     // Traverse thru the linked list => while(count < index)
     // Increase count by 1
@@ -135,25 +136,19 @@ class LinkedList {
     // Current is the node that is removed
     // Decrement the size
     removeAtIndex(index){
+        //code here
         if(index > 0 && index > this.size) return;
-
         let current = this.head;
         let previous;
         let count = 0;
+        if(index === 0) this.head = current.next;
 
-        // Remove first
-        if(index === 0) {
-            this.head = current.next;
-        } else {
-            while(count < index) {
-                count++;
-                previous = current;
-                current = current.next;
-            }
-
-            previous.next = current.next;
+        while(count < index){
+            count++;
+            previous = current;
+            current = current.next;
         }
-
+        previous.next = current.next;
         this.size--;
     }
 
