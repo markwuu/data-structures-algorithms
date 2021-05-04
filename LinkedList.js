@@ -141,14 +141,18 @@ class LinkedList {
         let current = this.head;
         let previous;
         let count = 0;
-        if(index === 0) this.head = current.next;
+        if(index === 0) {
+            this.head = current.next
+        } else {
 
-        while(count < index){
-            count++;
-            previous = current;
-            current = current.next;
+            while(count < index){
+                count++;
+                previous = current;
+                current = current.next;
+            }
+            previous.next = current.next;
         }
-        previous.next = current.next;
+
         this.size--;
     }
 
@@ -166,6 +170,19 @@ class LinkedList {
 
         this.head = prev;
         return prev;
+    }
+
+    deleteGivenNode(node){
+        let count = 0;
+        let current = this.head;
+        while(current){
+            if(current.data === node) {
+                current.data = current.next.data;
+                current.next = current.next.next;
+            }
+            current = current.next;
+        }
+        this.size--;
     }
 
     // Clear list
@@ -206,7 +223,9 @@ ll.insertAtIndex(1, 0);
 // ll.getAtIndex(1); //200
 // ll.getAtIndex(2); //300
 // ll.getAtIndex(6); //1
-// ll.removeAtIndex(0);
+ll.removeAtIndex(0);
 // ll.clearList();
-// ll.reverseList();
+ll.deleteGivenNode(500);
+// ll.deleteGivenNode(600);
+ll.reverseList();
 ll.printList();
