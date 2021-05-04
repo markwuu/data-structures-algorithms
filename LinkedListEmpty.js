@@ -45,6 +45,14 @@ class LinkedList {
         //code here
     }
 
+    deleteGivenNode() {
+        //code here
+    }
+
+    deleteLastNode() {
+        //code here
+    }
+
     clearList() {
         this.head = null;
         this.size = 0;

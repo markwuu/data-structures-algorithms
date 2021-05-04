@@ -176,6 +176,10 @@ class LinkedList {
         let count = 0;
         let current = this.head;
         while(current){
+            if(current.next === null) {
+                this.deleteLastNode();
+                return;
+            }
             if(current.data === node) {
                 current.data = current.next.data;
                 current.next = current.next.next;
@@ -183,6 +187,25 @@ class LinkedList {
             current = current.next;
         }
         this.size--;
+    }
+
+    //
+    deleteLastNode(){
+        let head = this.head;
+        if(head === null) return;
+        if(head.next === null){
+            this.head = null;
+            return;
+        }
+
+        let secondLast = head;
+        while(secondLast.next.next){
+            secondLast = secondLast.next;
+        }
+
+        secondLast.next = null;
+        this.size--;
+        return;
     }
 
     // Clear list
@@ -218,14 +241,16 @@ ll.insertFirst(100);
 ll.insertLast(400);
 ll.insertLast(500);
 ll.insertLast(600);
-ll.insertAtIndex(1, 0);
+// ll.insertAtIndex(1, 0);
 // ll.getAtIndex(0); //100
 // ll.getAtIndex(1); //200
 // ll.getAtIndex(2); //300
 // ll.getAtIndex(6); //1
-ll.removeAtIndex(0);
+// ll.removeAtIndex(0);
 // ll.clearList();
 ll.deleteGivenNode(500);
-// ll.deleteGivenNode(600);
-ll.reverseList();
+ll.deleteGivenNode(600);
+// ll.reverseList();
+ll.deleteLastNode();
+// ll.deleteLastNode();
 ll.printList();
