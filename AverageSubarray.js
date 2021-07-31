@@ -42,3 +42,29 @@ const findAverageOfSubarraySolutionTwo = (K, array) => {
 }
 
 console.log(findAverageOfSubarraySolutionTwo(5, [1,2,3,4,5,6,7,8,9,10]))
+
+//Find maximum sum of subarray
+//Optimized solution with sliding window technique
+const findMaximumSumOfSubarray = (K, array) => {
+    let windowStart = 0;
+    let windowSum = 0;
+    let maxSum = 0;
+
+    for(let windowEnd = 0; windowEnd < array.length; windowEnd++){
+        windowSum += array[windowEnd]
+
+        if(windowEnd >= K - 1){ //once window reaches desired width
+            if(maxSum < windowSum){
+                maxSum = windowSum;
+                maxSum
+            }
+            windowSum -= array[windowStart]; //remove windowStart value from windowSum
+            windowStart +=1; //move windowStart pointer forward
+        }
+    }
+    return maxSum;
+}
+
+console.log(findMaximumSumOfSubarray(2, [2, 3, 4, 1, 5]));
+// output: 9;
+// [5,1,3] sum = 9
