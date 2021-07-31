@@ -1,15 +1,12 @@
 // Brute force approach
-// Time complexity O(N^2) due to for loop within a for loop
+// Time complexity O(N*K) due to for loop within a for loop
 const findAverageOfSubarray = (K, array) => {
     let sum;
     let averageSumArray = [];
     for (let i = 0; i < array.length - K + 1; i++){
-        console.log(array[i])
         sum = 0.0;
         for (let j = i; j < i + K; j++) {
-            console.log(array[j]);
             sum += array[j];
-            console.log(sum)
         }
         averageSumArray.push(sum/K);
     }
