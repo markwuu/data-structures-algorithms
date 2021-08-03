@@ -102,7 +102,7 @@ const smallestSubarraySum = (array, S) => {
 }
 
 //[5, 2] => length is 2
-console.log(smallestSubarraySum([2, 1, 5, 2, 3, 2], 7));
+// console.log(smallestSubarraySum([2, 1, 5, 2, 3, 2], 7));
 
 const findLongestSubstring = (string, K) => {
     console.log(string)
@@ -127,4 +127,33 @@ const findLongestSubstring = (string, K) => {
     return maxLength
 }
 
-findLongestSubstring('hello', 1);
+// findLongestSubstring('hello', 1);
+
+//Find the maximum number of fruits given two baskets where a basket
+//can only hold 1 distinct fruit.
+//Limitations: Start on any fruit, but once you start you cannot stop. kind of like pringles.
+const find_maximum_fruits_two_distinct_baskets = (fruits) => {
+    let maxLength = 0;
+    let wStart = 0;
+    let fruitFrequency = {};
+
+    for(let wEnd = 0; wEnd < fruits.length; wEnd++){
+        let rightFruit = fruits[wEnd];
+        if(!(fruitFrequency[rightFruit])) fruitFrequency[rightFruit] = 0;
+        fruitFrequency[rightFruit] += 1;
+
+        while(Object.keys(fruitFrequency).length > 2) {
+          let leftFruit = fruits[wStart];
+          fruitFrequency[leftFruit] -= 1;
+          if(fruitFrequency[leftFruit] === 0){
+            delete fruitFrequency[leftFruit];
+            wStart += 1;
+          }
+        }
+        maxLength = Math.max(maxLength, wEnd - wStart + 1);
+    }
+
+    return maxLength;
+}
+
+console.log(find_maximum_fruits_two_distinct_baskets(['A', 'B', 'C', 'B', 'B', 'C']));
