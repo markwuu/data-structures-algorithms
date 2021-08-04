@@ -21,7 +21,7 @@ class BinarySearchTree {
         } else {
             let current = this.root;
             while(true) {
-                if(data < current.data){
+                if(data.id < current.data.id){
                     // Moving left
                     if(!current.left) {
                         current.left = node;
@@ -51,11 +51,30 @@ class BinarySearchTree {
     }
 }
 
+const data = {
+    name: "John",
+    age: "24",
+    position: "Software Engineer",
+    id: 20
+}
+
+const data2 = {
+    name: "Mark",
+    age: "30",
+    position: "Software Engineer",
+    id: 10
+}
+
+const data3 = {
+    name: "Ash",
+    age: "27",
+    position: "CEO",
+    id: 5
+}
+
 const bst = new BinarySearchTree();
-bst.insertNode(20);
-bst.insertNode(30);
-bst.insertNode(10);
-bst.insertNode(5);
-bst.insertNode(40);
+bst.insertNode(data);
+bst.insertNode(data2);
+bst.insertNode(data3);
 
 console.log('bst', bst);
