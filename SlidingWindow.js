@@ -205,3 +205,29 @@ const length_of_longest_substring = (str, k) => {
 }
 
 // console.log(length_of_longest_substring('aabccbb', 2));
+
+function length_of_longest_substring_of_ones(arr, k) {
+    let wStart = 0;
+    let maxLength = 0;
+    let numberOfOnesSeen = 0;
+
+    for (let wEnd = 0; wEnd < arr.length; wEnd++){
+        if(arr[wEnd] === 1) {
+            numberOfOnesSeen += 1;
+        }
+
+        if((wEnd - wStart + 1 - numberOfOnesSeen) > k){
+            if(arr[wStart] === 1){
+                numberOfOnesSeen -= 1;
+            }
+            wStart += 1;
+        }
+
+        maxLength = Math.max(maxLength, wEnd - wStart + 1);
+    }
+
+    return maxLength;
+}
+
+console.log(length_of_longest_substring_of_ones([0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 2));
+console.log(length_of_longest_substring_of_ones([0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], 3));
