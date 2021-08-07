@@ -167,8 +167,6 @@ const max_substring_no_repeates = (string) => {
         let rightChar = string[wEnd];
 
         if(rightChar in charIndexMap){
-            //logic here to set new wStart index
-            //wStart should be 1 over from the current character
             wStart = Math.max(wStart, charIndexMap[rightChar] + 1);
         }
 
@@ -180,3 +178,30 @@ const max_substring_no_repeates = (string) => {
 }
 
 // console.log(max_substring_no_repeates('abccde'));
+
+const length_of_longest_substring = (str, k) => {
+    let wStart = 0;
+    let maxRepeatingCharacter = 0;
+    let frequencyMap = {};
+    let maxLength = 0;
+
+    for(let wEnd = 0; wEnd < str.length; wEnd++){
+        let rightChar = str[wEnd];
+        if(!(rightChar in frequencyMap)){
+            frequencyMap[rightChar] = 0;
+        }
+        frequencyMap[rightChar] += 1; //Add chars to frequency map
+        maxRepeatingCharacter = Math.max(maxRepeatingCharacter, frequencyMap[rightChar]); //keep track of max repeating char
+
+        if((wEnd - wStart + 1 - maxRepeatingCharacter) > k){ //Checks windowSize - maxrepeating char, shrink window if it exceeds acceptable size
+            let leftChar = str[wStart];
+            frequencyMap[leftChar] -= 1;
+            wStart += 1;
+        }
+
+        maxLength = Math.max(maxLength, wEnd - wStart + 1);
+    }
+    return maxLength;
+}
+
+// console.log(length_of_longest_substring('aabccbb', 2));
