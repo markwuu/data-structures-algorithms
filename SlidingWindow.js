@@ -280,3 +280,77 @@ const containsStringPermutation = (string, pattern) => {
 }
 
 // console.log(containsStringPermutation('oidbcaf', 'abc'));
+
+
+//R:
+//Given a string and a pattern
+//find all anagrams of the pattern
+//Return the starting indices of the pattern
+
+//E:
+//Input: String="ppqp", Pattern="pq"
+//Output: [1, 2], pq, qp
+//Input: String="abbcabc", Pattern="abc"
+//Output: [2, 3, 4], bca, cab, abc
+
+//A:
+//Declare variables
+//wStart = 0, indexArray = [], patternFrequency = {}, matched = 0,
+//Loop through pattern and create patternFrequency hash map
+//Loop through string and decrement/increment patternFrequency map
+//if frequency hits 0, then increment matched to 1
+//matched === length of patternFrequency key length means we have an anagram match
+//store the wStart in the indexArray answer
+//if none found then return -1
+
+//C:
+const findIndexOfAllAnagrams = (str, pattern) => {
+    let wStart = 0;
+    let indexArray = [];
+    let patternFrequency = {};
+    let matched = 0;
+
+    for(let i = 0; i < pattern.length; i++) {
+        let patternChar = pattern[i];
+        if(!(patternChar in patternFrequency)){
+            patternFrequency[patternChar] = 0;
+        }
+        patternFrequency[patternChar] += 1;
+    }
+    patternFrequency
+
+    for(let wEnd = 0; wEnd < str.length; wEnd++) {
+        let rightChar = str[wEnd];
+        rightChar
+        if((rightChar in patternFrequency)){
+            //order matters here
+            patternFrequency[rightChar] -= 1;
+            if(patternFrequency[rightChar] === 0) {
+                matched += 1;
+            }
+        }
+
+        if(matched === Object.keys(patternFrequency).length) {
+            indexArray.push(wStart);
+        }
+
+        if(wEnd >= pattern.length - 1) {
+            let leftChar = str[wStart];
+            wStart += 1;
+            if((leftChar in patternFrequency)){
+                //order matters here
+                //we need to check if patternFrequency[leftChar] is zero to decrement matched
+                //BEFORE we increment the frequency (otherwise it will always be > 0)
+                if(patternFrequency[leftChar] === 0) {
+                    matched -= 1;
+                }
+                patternFrequency[leftChar] += 1;
+            }
+        }
+
+    }
+    return indexArray;
+}
+
+console.log(findIndexOfAllAnagrams('ppqp', 'pq'))
+console.log(findIndexOfAllAnagrams('abbcabc', 'abc'))
