@@ -229,5 +229,54 @@ function length_of_longest_substring_of_ones(arr, k) {
     return maxLength;
 }
 
-console.log(length_of_longest_substring_of_ones([0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 2));
-console.log(length_of_longest_substring_of_ones([0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], 3));
+// console.log(length_of_longest_substring_of_ones([0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], 2));
+// console.log(length_of_longest_substring_of_ones([0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], 3));
+
+const containsStringPermutation = (string, pattern) => {
+    let  wStart = 0;
+    let matchedChars = 0;
+    const patternFrequencyMap = {};
+
+    //Create the pattern frequency hash map
+    for(let i = 0; i < pattern.length; i++){
+        if(!(pattern[i] in patternFrequencyMap)){
+            patternFrequencyMap[pattern[i]] = 0;
+        }
+        patternFrequencyMap[pattern[i]] += 1;
+    }
+
+    //iterate through the string
+    for(let wEnd = 0; wEnd < string.length; wEnd++){
+        let rightChar = string[wEnd];
+        if(rightChar in patternFrequencyMap){
+            patternFrequencyMap[rightChar] -= 1;
+
+            if(patternFrequencyMap[rightChar] === 0){
+                matchedChars += 1;
+            }
+        }
+
+        //Return true when we have a permutation
+        //matchedChars will match the length of of the keys frequency map
+        //bc we only increment and decrement matchedChars
+        //when the frequency hits 0.
+        if(matchedChars === Object.keys(patternFrequencyMap).length){
+            return true;
+        }
+
+        //shrink the sliding window once window reaches size of pattern word
+        if(wEnd >= pattern.length - 1) {
+            leftChar = string[wStart];
+            wStart += 1;
+            if(leftChar in patternFrequencyMap){
+                if(patternFrequencyMap[leftChar] === 0) {
+                    matchedChars -= 1;
+                }
+                patternFrequencyMap[leftChar] += 1;
+            }
+        }
+    }
+    return false;
+}
+
+// console.log(containsStringPermutation('oidbcaf', 'abc'));
